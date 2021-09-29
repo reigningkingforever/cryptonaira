@@ -23,6 +23,18 @@
                     <p>Currencies</p>
                 </a>
             </li>
+            <li>
+                <a class="nav-link" href="{{route('currency.store.rates')}}">
+                    <i class="nc-icon nc-paper-2"></i>
+                    <p>Rates</p>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{route('payment.transactions')}}">
+                    <i class="nc-icon nc-paper-2"></i>
+                    <p>Transactions</p>
+                </a>
+            </li>
             
             
             

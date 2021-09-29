@@ -21,3 +21,7 @@ Route::post('currencies/store', 'CurrencyController@store')->name('currency.stor
 Route::get('currencies/edit/{currency}', 'CurrencyController@edit')->name('currency.edit');
 Route::post('currencies/update/{currency}', 'CurrencyController@update')->name('currency.update');
 Route::post('currencies/destroy/{currency}', 'CurrencyController@destroy')->name('currency.destroy');
+Route::post('currencies/rates/store/', 'CurrencyController@storeRates')->name('currency.store.rates');
+Route::get('currencies/rates', 'CurrencyController@rates')->name('currency.rates');
+
+Route::get('transactions', 'PaymentController@transactions')->name('payment.transactions');

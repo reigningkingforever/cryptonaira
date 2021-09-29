@@ -39,13 +39,18 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="">Currency Symbol</label>
-                                                <input type="text" name="name" value="{{$currency->symbol}}" maxlength="3" class="form-control" required>
+                                                <input type="text" name="symbol" value="{{$currency->symbol}}" maxlength="3" class="form-control" required>
                                                 <small class="form-text text-muted">Symbol of Currency</small>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="">Currency Symbol</label>
-                                                <input type="text" name="name" value="{{$currency->symbol}}" maxlength="3" class="form-control" required>
-                                                <small class="form-text text-muted">Symbol of Currency</small>
+                                            <div class="form-group row">
+                                                <label class="col-md-12">Currency Status</label>
+                                                
+                                                <input type="checkbox" name="status" value="1" class="form-control col-md-2" @if($currency->status) checked @endif required>
+                                                <label class="col-md-3">Active</label>
+                                                
+                                                    {{-- <small class="form-text text-muted">Symbol of Currency</small> --}}
+                                                
+                                                
                                             </div>
                                             
                                             <div class="form-group">

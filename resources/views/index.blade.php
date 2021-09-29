@@ -49,7 +49,7 @@
 				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
 					<span class="label-input100">Amount you're sending *</span>
 					<input class="input100" type="text" name="amount" placeholder="Amount">
-					<span class="label-input100">You will receive <span id="converted">10,000</span></span>
+					<span class="label-input100">You will receive <span id="converted">₦ 10,000</span></span>
 				</div>
 				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
 					<span class="label-input100">Bank Account *</span>

@@ -30,5 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'ip_api'=> env('IP_API_KEY'),
+    
+    'coinqvest'=> [
+        'key'=> env('COINQVEST_KEY'),
+        'secret'=> env('COINQVEST_SECRET')
+    ],
 
 ];

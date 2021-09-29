@@ -28,27 +28,28 @@
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="{{route('currency.store')}}" enctype="multipart/form-data"> @csrf
+                            <form method="post" action="{{route('currency.store.rates')}}"  enctype="multipart/form-data"> @csrf
                                 <fieldset>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="">Currency Name</label>
-                                                <input type="text" name="name" class="form-control" required>
+                                                <label class="">Base Currency</label>
+                                                <select name="base" class="form-control" required>
+                                                    @foreach ($currencies as $currency)
+                                                        <option value="{{$currency->id}}">{{$currency->name}}</option>
+                                                    @endforeach
+                                                    
+                                                </select>
                                                 <small class="form-text text-muted">Name of Currency</small>
                                             </div>
                                             <div class="form-group">
-                                                <label class="">Currency Symbol</label>
-                                                <input type="text" name="symbol" maxlength="3" class="form-control" required>
-                                                <small class="form-text text-muted">Symbol of Currency</small>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-12">Currency Status</label>
-                                                
-                                                <input type="checkbox" name="status" value="1" class="form-control col-md-2" required>
-                                                <label class="col-md-3">Active</label>
-                                                
-                                                   
+                                                <label class="">Target Currency</label>
+                                                <select name="target" class="form-control" required>
+                                                    @foreach ($currencies as $currency)
+                                                        <option value="{{$currency->id}}">{{$currency->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <small class="form-text text-muted">Name of Currency</small>
                                             </div>
                                             
                                             <div class="form-group">
@@ -69,7 +70,7 @@
                 <div class="col-md-7">
                     <div class="card data-tables strpied-tabled-with-hover">
                         <div class="card-header ">
-                            <h4 class="card-title">Currencies</h4>
+                            <h4 class="card-title">Currency Rates</h4>
                             <p class="card-category">Here is a sub name for this table</p>
                         </div>
                         <div class="card-body table-full-width table-responsive dataTable dtr-inline">
@@ -87,14 +88,14 @@
                                         
                                         </a>
                                     </th>
-                                    <th>Name</th> 
-                                    <th>Symbol</th>
-                                    <th>Status</th>
+                                    <th>Base</th> 
+                                    <th>Target</th>
+                                    <th>Amount</th>
                 
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($currencies as $currency)
+                                    @foreach ($rates as $rate)
                                         <tr>
                                             <td>
                                                 <div class="form-check checkbox-inline">
@@ -105,30 +106,30 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                {{$currency->name}}   
+                                                {{$rate->base_currency->symbol}}   
                                             </td>
                                             <td>
-                                                {{$currency->symbol}}  
+                                                {{$rate->target_currency->symbol}}  
                                             </td>
                                             
                                             <td>
-                                                @if($currency->status) <span class="badge badge-success">Active</span>
-                                                @else <span class="badge badge-danger">Inactive</span> @endif
+                                                {{$rate->amount}}
+                                                
                                             </td>
                                             <td class="d-block">
                                                 <div class="">
-                                                    <a href="{{route('currency.edit',$currency)}}" rel="tooltip" title="edit item" data-placement="left" class="btn btn-info btn-outline btn-sm rounded">
+                                                    <a href="{{route('currency.edit',$rate->base_currency)}}" rel="tooltip" title="edit item" data-placement="left" class="btn btn-info btn-outline btn-sm rounded">
                                                         <span class="btn-label">
                                                             <i class="fa fa-pencil"></i>
                                                         </span>  
                                                     </a>
                                                     {{-- <br> --}}
-                                                    <a href="javascript:void(0)" type="button" data-toggle="modal" data-target="#delete-item{{$currency->id}}" class="btn btn-danger btn-outline btn-sm rounded" rel="tooltip" title="delete item" data-placement="left">
+                                                    <a href="javascript:void(0)" type="button" data-toggle="modal" data-target="#delete-item{{$rate->base}}" class="btn btn-danger btn-outline btn-sm rounded" rel="tooltip" title="delete item" data-placement="left">
                                                         <span class="btn-label">
                                                             <i class="fa fa-trash"></i>
                                                         </span>
                                                     </a>
-                                                    <div class="modal fade modal-mini modal-primary" id="delete-item{{$currency->id}}" tabindex="-1" role="dialog" aria-labelledby="delete-item{{$currency->id}}" aria-hidden="true">
+                                                    <div class="modal fade modal-mini modal-primary" id="delete-item{{$rate->base}}" tabindex="-1" role="dialog" aria-labelledby="delete-item{{$rate->base}}" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header justify-content-center">
@@ -138,7 +139,7 @@
                                                                     <p>Are you sure you want to delete this item</p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form class="d-inline" action="{{route('currency.destroy',$currency)}}" method="POST">@csrf
+                                                                    <form class="d-inline" action="{{route('currency.destroy',$rate->base_currency)}}" method="POST">@csrf
                                                                         <button type="submit" class="btn btn-danger">Yes</button>
                                                                     </form>
                                                                     <button type="button" class="btn btn-link btn-simple" style="cursor:pointer" data-dismiss="modal">Close</button>
