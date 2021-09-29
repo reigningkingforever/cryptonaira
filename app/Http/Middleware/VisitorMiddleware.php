@@ -42,7 +42,7 @@ class VisitorMiddleware
                 'country'=> $temp['country'],
                 'state'=> $temp['state'],
                 'city'=> $temp['city'],
-                'device_type'=> Browser::isMobile()? 'mobile':Browser::isTablet()? 'tablet':Browser::isDesktop()?'desktop':'bot',
+                'device_type'=> (Browser::isMobile()) ? 'mobile': (Browser::isTablet())? 'tablet': (Browser::isDesktop())?'desktop':'bot',
                 'device_name'=> Browser::deviceFamily().' '.Browser::deviceModel(),
                 'platform'=> Browser::platformName(),
                 'browser'=> Browser::browserFamily(),
