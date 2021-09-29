@@ -35,14 +35,21 @@ class VisitorMiddleware
             if(isset($place->country_code))
             $temp = ['iso_code'=> $place->country_code,'country'=> $place->country_name,'state'=> $place->region,'city'=> $place->city,'timezone'=> $place->timezone] ;
             else
-            $temp = ['iso_code'=> 'NG','country'=> 'Nigeria','state'=>'Lagos','city'=>'Lagos','timezone'=> 'Africa/Lagos'];    
+            $temp = ['iso_code'=> 'NG','country'=> 'Nigeria','state'=>'Lagos','city'=>'Lagos','timezone'=> 'Africa/Lagos'];
+            if(Browser::isMobile() == 'mobile')
+                $device = 'mobile';
+            else if(Browser::isTablet() == 'tablet')
+                $device = 'tablet';
+            else if(Browser::isDesktop() == 'desktop')
+                $device = 'desktop';
+            else $device = 'bot'; 
             $visitor = Location::firstOrCreate(
                 ['ip_address' => request()->ip(),
                 'timezone'=> $temp['timezone'],
                 'country'=> $temp['country'],
                 'state'=> $temp['state'],
                 'city'=> $temp['city'],
-                'device_type'=> (Browser::isMobile()) ? 'mobile': (Browser::isTablet())? 'tablet': (Browser::isDesktop())?'desktop':'bot',
+                'device_type'=> $device,
                 'device_name'=> Browser::deviceFamily().' '.Browser::deviceModel(),
                 'platform'=> Browser::platformName(),
                 'browser'=> Browser::browserFamily(),
