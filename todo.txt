@@ -1,0 +1,31 @@
+{#1267 ▼
+  +"deposit": {#1218 ▼
+    +"id": "57a830be474e"
+    +"type": "DIRECT"
+    +"state": "AWAITING_DEPOSIT"
+    +"origin": "API"
+    +"createTime": "2021-09-30T14:29:08+00:00"
+    +"completeTime": null
+    +"expireTime": null
+    +"sourceNetworkCode": "BTC"
+    +"sourceNetworkName": "Bitcoin"
+    +"depositAddress": "bc1q4xan5rzu7kns9wxzdn4urna60uh4f7d2shsayalqzlcmfmnkc8dsnh7rp8"
+    +"sourceAmountRequired": "ARBITRARY_AMOUNT"
+    +"sourceAmountReceived": "0"
+    +"sourceAmountMin": "0.0002"
+    +"sourceAmountMax": null
+    +"sourceAssetIssuer": "BTC:GAUTUYY2THLF7SGITDFMXJVYH3LHDSMGEAKSBU267M2K7A3W543CKUEF"
+    +"creditAssetIssuer": "BTC:GAUTUYY2THLF7SGITDFMXJVYH3LHDSMGEAKSBU267M2K7A3W543CKUEF"
+    +"creditAmountGross": null
+    +"creditAmountFee": null
+    +"creditAmountNet": null
+    +"creditAmountNetReceived": "0"
+    +"blockchainTransactions": []
+    +"customerId": null
+    +"meta": null
+    +"failover": false
+    +"failoverType": false
+    +"failoverParentId": null
+    +"webhook": null
+  }
+}

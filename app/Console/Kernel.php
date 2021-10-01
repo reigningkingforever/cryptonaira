@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Payment;
+use Ixudra\Curl\Facades\Curl;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +26,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function () {
+            $payments = Payment::where('base_status','AWAITING_DEPOSIT')->orderBy('created_at','ASC')->get();
+            if($payments->isNotEmpty()){
+                foreach($payments as $payment){
+                    $response = Curl::to('https://www.coinqvest.com/api/v1/deposit')
+                    ->withHeaders( array("X-Basic" => hash('sha256',   config('services.coinqvest.key').':'.config('services.coinqvest.secret')  )))
+                    ->withData( array( "id" => $payment->reference) )
+                    ->asJson()
+                    ->get();
+                    // dd($response->deposit->state);
+                    if($response->deposit->state != 'AWAITING_DEPOSIT')
+                    $payment->base_status = $response->deposit->state;
+                    $payment->save();
+                }
+            }
+        })->everyMinute();
     }
 
     /**

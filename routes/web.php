@@ -14,8 +14,12 @@
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
-
+Route::view('email','email');
 Route::get('/home', 'HomeController@dashboard')->name('home');
+Route::post('ajax/get-account','AjaxController@getAccount')->name('getAccountName');
+Route::post('generate/address','PaymentController@generateAddress')->name('generateAddress');
+Route::post('deposit/confirmation','PaymentController@depositConfirmation')->name('depositConfirmation');
+
 Route::get('currencies', 'CurrencyController@index')->name('currency.list');
 Route::post('currencies/store', 'CurrencyController@store')->name('currency.store');
 Route::get('currencies/edit/{currency}', 'CurrencyController@edit')->name('currency.edit');

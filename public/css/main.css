@@ -124,7 +124,10 @@ iframe {
 	border: none !important;
 }
 
-
+button.copy{
+  padding:20px;
+  margin-top:10px;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ Contact ]*/
