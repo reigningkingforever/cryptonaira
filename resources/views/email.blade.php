@@ -211,8 +211,7 @@
                                 <p style="font-size: 14px; line-height: 140%;">
                                   <em>
                                     <span style="font-family: Montserrat, sans-serif; font-size: 14px; line-height: 19.6px;">
-                                      You initiated a money exchange order on our platform at CRYPTONAIRA.COM. As soon as we receive your BTC, NGN will be credited into your 
-                                      bank account
+                                      {{$body}}
                                     </span>
                                   </em>
                                 </p>
@@ -284,7 +283,7 @@
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Montserrat',sans-serif;" align="left">
                                 
                                 <div class="v-text-align" style="color: #8b8989; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;">123XPWERZTU07</p>
+                                  <p style="font-size: 14px; line-height: 140%;">{{$payment->address}}</p>
                                 </div>
 
                               </td>
@@ -292,7 +291,7 @@
                           </tbody>
                         </table>
 
-                    <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
+                      </div>
                     </div>
                   </div>
                   
@@ -364,7 +363,7 @@
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 0px;font-family:'Montserrat',sans-serif;" align="left">
                                 
                                 <div class="v-text-align" style="color: #8b8989; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;"><strong>$ 645.00</strong></p>
+                                  <p style="font-size: 14px; line-height: 140%;"><strong>{{$payment->base->symbol}}</strong></p>
                                 </div>
 
                               </td>
@@ -386,7 +385,7 @@
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 0px;font-family:'Montserrat',sans-serif;" align="left">
                                 
                                 <div class="v-text-align" style="color: #8b8989; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;"><strong>$ 645.00</strong></p>
+                                  <p style="font-size: 14px; line-height: 140%;"><strong>{{$payment->base_amount}}</strong></p>
                                 </div>
 
                               </td>
@@ -403,7 +402,7 @@
                             <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 0px;font-family:'Montserrat',sans-serif;" align="left">
                               
                               <div class="v-text-align" style="color: #8b8989; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                <p style="font-size: 14px; line-height: 140%;"><strong>CONFIRMED</strong></p>
+                                <p style="font-size: 14px; line-height: 140%;"><strong>{{str_replace('_',' ',$payment->base_status)}}</strong></p>
                               </div>
 
                             </td>
@@ -439,7 +438,7 @@
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 0px;font-family:'Montserrat',sans-serif;" align="left">
                                 
                                 <div class="v-text-align" style="color: #8b8989; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;"><strong>$ 645.00</strong></p>
+                                  <p style="font-size: 14px; line-height: 140%;"><strong>{{$payment->target->symbol}}</strong></p>
                                 </div>
 
                               </td>
@@ -457,7 +456,7 @@
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 0px;font-family:'Montserrat',sans-serif;" align="left">
                                 
                                 <div class="v-text-align" style="color: #8b8989; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;"><strong>$ 645.00</strong></p>
+                                  <p style="font-size: 14px; line-height: 140%;"><strong>{{number_format($payment->target_amount,2)}}</strong></p>
                                 </div>
 
                               </td>
@@ -475,7 +474,7 @@
                               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:0px 10px 0px;font-family:'Montserrat',sans-serif;" align="left">
                                 
                                 <div class="v-text-align" style="color: #8b8989; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;"><strong>AWAITING</strong></p>
+                                  <p style="font-size: 14px; line-height: 140%;"><strong>{{str_replace('_',' ',$payment->target_status)}}</strong></p>
                                 </div>
 
                               </td>

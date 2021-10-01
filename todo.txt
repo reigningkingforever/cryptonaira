@@ -1,3 +1,7 @@
+find another exchange rate.. exchange to dollar first
+after transfer,
+
+
 {#1267 ▼
   +"deposit": {#1218 ▼
     +"id": "57a830be474e"

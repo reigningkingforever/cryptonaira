@@ -10,7 +10,6 @@ use Illuminate\Notifications\Notification;
 class AddressNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-
     /**
      * Create a new notification instance.
      *
@@ -40,14 +39,13 @@ class AddressNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        
         return (new MailMessage)->subject('Order Notification')
         ->view('email',[
-            'greeting' => 'Dear Customer',
-            'heading' => 'Complete your Transaction',
-            'body' => 'firstname is a this occupation and resides in place',
-            'button' => 'View Members',
-            'url' => 'https://google.com',
-            'footer' => 'Member\'s contact: $this->user->email.Phone: $this->user->phone'
+            'body' => 'You initiated a money exchange order on our platform at CRYPTONAIRA.COM. As soon as we receive your '.$notifiable->base->symbol.' '.$notifiable->base_amount.', '.$notifiable->target->symbol.' '.$notifiable->target_amount.' will be credited into your 
+            specified bank account',
+            'payment' => $notifiable,
+            
         ]);
     }
 

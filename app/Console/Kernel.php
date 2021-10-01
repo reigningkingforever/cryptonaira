@@ -42,6 +42,7 @@ class Kernel extends ConsoleKernel
                 }
             }
         })->everyMinute();
+        $schedule->job(new GetExchangeRatesJob)->everyFifteenMinutes();
     }
 
     /**

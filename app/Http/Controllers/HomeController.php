@@ -29,17 +29,9 @@ class HomeController extends Controller
     public function index()
     {
         $currencies = Currency::where('status',true)->get();
+        GetExchangeRatesJob::dispatch();
         $rates = Rate::all();
         $banks = Bank::orderBy('name','ASC')->get();
-        // dd($currencies[0]->nairaRate);
-        // $response = Curl::to('https://www.coinqvest.com/api/v1/deposit')
-        // ->withHeaders( array("X-Basic" => hash('sha256',   config('services.coinqvest.key').':'.config('services.coinqvest.secret')  )))
-        // ->withData( array( "id" => '57a830be474e') )
-        // ->asJson()
-        // ->get();
-        // dd($response->deposit->state);
-        // GetExchangeRatesJob::dispatch();
-        
         return view('index',compact('currencies','rates','banks'));
     }
     public function dashboard()

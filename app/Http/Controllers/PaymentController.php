@@ -12,27 +12,31 @@ class PaymentController extends Controller
     
     public function generateAddress(Request $request)
     {
-        $response = Curl::to('https://www.coinqvest.com/api/v1/deposit')
-        ->withHeaders( array("X-Basic" => hash('sha256',   config('services.coinqvest.key').':'.config('services.coinqvest.secret')  )))
-        ->withData( array( "sourceNetworkCode" => $request->currency) )
-        ->asJson()
-        ->post();
+        try{
+            $response = Curl::to('https://www.coinqvest.com/api/v1/deposit')
+            ->withHeaders( array("X-Basic" => hash('sha256',   config('services.coinqvest.key').':'.config('services.coinqvest.secret')  )))
+            ->withData( array( "sourceNetworkCode" => $request->currency) )
+            ->asJson()
+            ->post();
+            $address = $response->deposit->depositAddress;
+            $payment = new Payment;
+            $payment->reference = $response->deposit->id;
+            $payment->email = $request->email;
+            $payment->base_currency = $request->currency;
+            $payment->base_amount = $request->amount;
+            $payment->address = $address;
+            $payment->target_currency = 'NGN';
+            $payment->target_amount = $request->target_amount;
+            $payment->bank_code = $request->bank_code;
+            $payment->account_number = $request->account_number;
+            $payment->save();
+            $payment->notify(new AddressNotification);
+        }
+        catch(Exception $e){
+            $address = 'Something is wrong. Please try again after sometime';
+        }
         
-        $payment = new Payment;
-        $payment->reference = $response->deposit->id;
-        $payment->email = $request->email;
-        $payment->base_currency = $request->currency;
-        $payment->base_amount = $request->amount;
-        $payment->address = $response->deposit->depositAddress;
-        $payment->target_currency = 'NGN';
-        $payment->target_amount = $request->target_amount;
-        $payment->bank_code = $request->bank_code;
-        $payment->account_number = $request->account_number;
-        $payment->save();
-        $payment->notify(new AddressNotification);
-        // dd($request->all());
-        // return response()->json(['address'=> 'bc1q4xan5rzu7kns9wxzdn4urna60uh4f7d2shsayalqzlcmfmnkc8dsnh7rp8'],200);
-        return response()->json(['address'=> $payment->address],200);
+        return response()->json(['address'=> $address],200);
 
     }
 

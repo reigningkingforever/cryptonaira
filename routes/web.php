@@ -14,7 +14,11 @@
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
-Route::view('email','email');
+Route::get('email',function(){
+    $payment = \App\Payment::find(1);
+    $payment->notify(new \App\Notifications\AddressNotification);
+    return 'done';
+});
 Route::get('/home', 'HomeController@dashboard')->name('home');
 Route::post('ajax/get-account','AjaxController@getAccount')->name('getAccountName');
 Route::post('generate/address','PaymentController@generateAddress')->name('generateAddress');
